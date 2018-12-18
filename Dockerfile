@@ -1,22 +1,26 @@
-FROM    python:3.7-slim
+FROM    python:3.7-alpine
 
-RUN     apt-get -y update && \
-        apt-get -y upgrade
+RUN     apk add --no-cache \
+          build-base \
+          libffi \
+          libffi-dev \
+          openssl \
+          openssl-dev
 
-RUN     apt-get autoclean -y && \
-        apt-get clean -y && \
-        apt-get -y autoremove && \
-        apt-get remove --purge --auto-remove \
-          systemd 
-
-RUN     pip install \ 
+RUN     pip install \
           errbot \
           slackclient
 
-RUN     useradd -r -m -s /bin/false erric
+RUN     apk del \
+          build-base \
+          libffi \
+          libffi-dev \
+          openssl \
+          openssl-dev
 
-USER    erric
-WORKDIR /home/erric
+RUN     adduser -S -D -h /home/errbot errbot
+
+WORKDIR /home/errbot
 
 RUN     errbot --init
 
