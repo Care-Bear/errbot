@@ -1,6 +1,6 @@
 FROM    python:3.7-alpine
 
-RUN     apk add --no-cache \
+RUN     apk add --no-cache git \
           build-base \
           libffi \
           libffi-dev \
@@ -23,5 +23,6 @@ RUN     adduser -S -D -h /home/errbot errbot
 WORKDIR /home/errbot
 
 RUN     errbot --init
+COPY    config.py ./
 
 CMD     ["errbot"]
