@@ -13,3 +13,4 @@ BOT_ADMINS = (os.getenv("BOT_ADMINS").split(","))
 BOT_PREFIX_OPTIONAL_ON_CHAT = True
 BOT_ALT_PREFIXES = (os.getenv("BOT_NAME"),)
 DIVERT_TO_PRIVATE = ('help', 'about', 'status')
+BOT_ASYNC = True
